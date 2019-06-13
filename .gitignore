@@ -1,0 +1,4 @@
+.env
+.serverless/
+.vscode/
+node_modules/

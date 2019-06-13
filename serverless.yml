@@ -1,0 +1,19 @@
+service: weather-notify 
+
+provider:
+  name: aws
+  runtime: python3.7
+
+functions:
+  weathernotify:
+    handler: handler.notify
+    events:
+      - schedule: cron(0 * * * ? *)
+    environment:
+      DARK_SKY_API_KEY: ${ssm:darksky.api.key}
+      TWILIO_ACCOUNT_SID: ${ssm:twilio.sid}
+      TWILIO_AUTH_TOKEN: ${ssm:twilio.token}
+      TWILIO_FROM: ${ssm:twilio.from}
+
+plugins:
+  - serverless-python-requirements
